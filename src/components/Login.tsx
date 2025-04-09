@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './Login.css';
 
 
 interface User {
@@ -55,7 +56,7 @@ function Login() {
     return (
         <div className="login-page">
             <h3>Perfil</h3>
-            <h3>Username = </h3><span id="usr">{perfil}</span>
+            <span id="usr">{perfil}</span>
             <div className="form">
                 <input
                     type="text"

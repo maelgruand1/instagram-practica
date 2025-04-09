@@ -1,0 +1,72 @@
+/* Style pour la page de login */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Titre principal */
+h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Conteneur du formulaire */
+.form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Champs de saisie */
+input[type="text"], input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Champ de saisie : focus */
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Bouton */
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Bouton : hover */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Message d'authentification */
+#message {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Affichage de l'username */
+#usr {
+    font-weight: bold;
+    color: #007bff;
+}
