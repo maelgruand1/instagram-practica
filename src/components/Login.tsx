@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Users from "./User";
+
 
 interface User {
     id: number;
