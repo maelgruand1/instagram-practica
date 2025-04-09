@@ -6,6 +6,9 @@ class Users{
         this.nameUser = userName;
         this.passwordUser = pswd;
     }
+
+    
+
 }
 
 
