@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import './Login.css';
 
-
 interface User {
     id: number;
     name: string;
     password: string;
+}
+
+interface LoginProps {
+    onLoginSuccess: (username: string) => void;
 }
 
 const Admin: User = {
@@ -20,7 +23,7 @@ const Mael: User = {
     password: "12345",
 };
 
-function Login() {
+function Login({ onLoginSuccess }: LoginProps) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -40,7 +43,7 @@ function Login() {
             setMessage("Error credentiales incorrectas");
             return false;
         }
-        setMessage("Authentifiado");
+        setMessage("Authentifié");
         return true;
     };
 
@@ -48,6 +51,7 @@ function Login() {
         const connected = connect();
         if (connected) {
             setPerfil(username);
+            onLoginSuccess(username); // transmet au parent
         } else {
             setPerfil("Error login");
         }
@@ -56,7 +60,6 @@ function Login() {
     return (
         <div className="login-page">
             <h3>Perfil</h3>
-            <span id="usr">{perfil}</span>
             <div className="form">
                 <input
                     type="text"
