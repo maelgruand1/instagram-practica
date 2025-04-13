@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
-
 import './Publications.css';
 import Publications from "./Publications";
-
 function NewPublication(){
     const [page, setPage] = useState("plus");
 
@@ -18,6 +16,16 @@ function NewPublication(){
                         <button onClick={() => setPage("publications")}>
                             Return to publications
                         </button>
+                        <br /><br />
+                        <form>
+                            {/* <button>Import link or file</button> */}
+                            <input type="text" placeholder="Link de la imagen" />
+                            <br /><br />
+                            <input type="text" placeholder="Titulo de la publicación"/>
+                            <button>Send publication</button>
+
+                        </form>
+
                     </div>
                 );
         }
