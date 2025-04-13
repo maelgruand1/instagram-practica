@@ -1,19 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import Login from './components/Login';
-import './App.css';
-
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Err404 from "./components/404";
+import Perfil from "./components/Profile";
 
 function App() {
-  return (
-      <div className="App">
-      <header className="App-header">
-        <h1 className="title">Instamedac</h1>
-        <Login/>
-      </header>
-    
-    </div>
-  );
+    const [page, setPage] = useState("home");
+    const [username, setUsername] = useState("");
+
+    const renderPage = () => {
+        switch (page) {
+            case "home":
+                return <Home/>;
+            case "login":
+                return <Login onLoginSuccess={(name) => {
+                    setUsername(name);
+                    setPage("home"); // Revenir à l'accueil après login
+                }} />;
+            case "publications":
+                return <div><h2>Publications</h2></div>;
+            case "perfil":
+                return <Perfil username={username}/>
+            default:
+                return <Err404 />;
+        }
+    };
+
+    return (
+        <div>
+            <Navbar onNavigate={setPage} />
+          
+
+            {renderPage()}
+        </div>
+    );
 }
 
 export default App;
