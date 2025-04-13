@@ -11,7 +11,7 @@ function Perfil({ username }: PerfilProps){
         <div className="profile">
             <h1>Perfil</h1>
             {/* Nombre de perfil récupérer du login grâce au soulevement d'état */}
-            <p>Nombre : {username ? username : "Invité"}</p>
+            <p>Nombre : {username ? username : "Invitado"}</p>
             
         </div>
     )
