@@ -4,6 +4,9 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Err404 from "./components/404";
 import Perfil from "./components/Profile";
+import Publications from "./components/Publications";
+import NewPublication from "./components/newPublications";
+
 
 function App() {
     const [page, setPage] = useState("home");
@@ -19,9 +22,11 @@ function App() {
                     setPage("home"); // Revenir à l'accueil après login
                 }} />;
             case "publications":
-                return <div><h2>Publications</h2></div>;
+                return <Publications/> ;
             case "perfil":
                 return <Perfil username={username}/>
+            case "plus":
+                return <NewPublication/> ;
             default:
                 return <Err404 />;
         }

@@ -1,0 +1,81 @@
+.publication,
+.newPub {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.publication:hover,
+.newPub:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.publication h1,
+.newPub h1 {
+    color: #222;
+    margin-bottom: 20px;
+    font-size: 28px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+form input[type="text"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+form input[type="text"]:focus {
+    border-color: #5b9bd5;
+}
+
+form button {
+    padding: 12px;
+    background-color: #5b9bd5;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #4a8ac3;
+}
+
+button {
+    margin-top: 10px;
+}
+.publication img,
+.newPub img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.publication img:hover,
+.newPub img:hover {
+    transform: scale(1.03);
+}
