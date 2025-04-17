@@ -6,10 +6,6 @@ interface PerfilProps {
 }
 
 function Perfil({ username }: PerfilProps) {
-    useEffect(() => {
-        alert(`Hola ${username ? username : "Invitado"}`);
-    }, []); // [] = ne se déclenche qu'une fois au montage du composant
-
     return (
         <div className="profile">
             <h1>Perfil</h1>

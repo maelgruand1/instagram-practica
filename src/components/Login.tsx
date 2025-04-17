@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import './Login.css';
+import User from "./modules/User";
 
-interface User {
+interface Users {
     id: number;
     name: string;
     password: string;
@@ -11,16 +12,19 @@ interface LoginProps {
     onLoginSuccess: (username: string) => void;
 }
 
-const Admin: User = {
-    id: 0,
-    name: "admin",
-    password: "root",
+const AdminUser = new User(0, "Admin", "root");
+const MaelUser = new User(1, "Mael", "12345")
+
+const Admin: Users = {
+    id: AdminUser.getId,
+    name: AdminUser.getName,
+    password: AdminUser.getPassword,
 };
 
-const Mael: User = {
-    id: 1,
-    name: "Mael",
-    password: "12345",
+const Mael: Users = {
+    id: MaelUser.getId,
+    name: MaelUser.getName,
+    password: MaelUser.getPassword,
 };
 
 function Login({ onLoginSuccess }: LoginProps) {
