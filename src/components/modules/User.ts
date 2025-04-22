@@ -1,37 +1,37 @@
-export default class User{
-    private id : number;
-    private name : string;
-    private password : string;
+export default class User {
+    private id: number;
+    private name: string;
+    private password: string;
 
-    constructor(id : number, name : string, password : string){
+    constructor(id: number, name: string, password: string) {
         this.id = id;
         this.name = name;
         this.password = password;
     }
-    
-    // Get user
-    public get getId() : number {
-        return this.id   
+
+    // Getters
+    public getId(): number {
+        return this.id;
     }
-    public get getName() : string {
+
+    public getName(): string {
         return this.name;
     }
-    public get getPassword() : string {
+
+    public getPassword(): string {
         return this.password;
     }
-    // Set user
-    public set setId(userID : number) {
+
+    // Setters
+    public setId(userID: number): void {
         this.id = userID;
     }
-    
-    public set setName(username : string) {
+
+    public setName(username: string): void {
         this.name = username;
     }
-    
-    public set userPassword(userPass : string) {
+
+    public setPassword(userPass: string): void {
         this.password = userPass;
     }
-    
 }
-
-

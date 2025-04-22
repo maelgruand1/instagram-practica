@@ -1,9 +1,11 @@
 // modules/Storage.ts
 export interface Publication {
     id: number;
+    username: string; // Ajouté
     title: string;
     image: string;
 }
+
 
 const DB_NAME = 'PublicationsDB';
 const STORE_NAME = 'publications';
@@ -39,11 +41,11 @@ export default class Storage {
         });
     }
 
-    public async addPublication(title: string, image: string): Promise<void> {
+    public async addPublication(username: string, title: string, image: string): Promise<void> {
         if (!this.db) return;
         const tx = this.db.transaction(STORE_NAME, "readwrite");
         const store = tx.objectStore(STORE_NAME);
-        store.add({ title, image });
+        store.add({ username , title, image });
     }
 
     public async getAllPublications(): Promise<Publication[]> {

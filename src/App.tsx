@@ -26,7 +26,7 @@ function App() {
             case "perfil":
                 return <Perfil username={username}/>
             case "plus":
-                return <NewPublication/> ;
+                return <NewPublication username={username}/>;
             default:
                 return <Err404 />;
         }

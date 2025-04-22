@@ -2,36 +2,17 @@ import React, { useState } from "react";
 import './Login.css';
 import User from "./modules/User";
 
-interface Users {
-    id: number;
-    name: string;
-    password: string;
-}
-
 interface LoginProps {
     onLoginSuccess: (username: string) => void;
 }
 
-const AdminUser = new User(0, "Admin", "root");
-const MaelUser = new User(1, "Mael", "12345")
-
-const Admin: Users = {
-    id: AdminUser.getId,
-    name: AdminUser.getName,
-    password: AdminUser.getPassword,
-};
-
-const Mael: Users = {
-    id: MaelUser.getId,
-    name: MaelUser.getName,
-    password: MaelUser.getPassword,
-};
+export const AdminUser = new User(0, "Admin", "root");
+export const MaelUser = new User(1, "Mael", "12345");
 
 function Login({ onLoginSuccess }: LoginProps) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [perfil, setPerfil] = useState("");
 
     const connect = (): boolean => {
         if (username.trim() === "" || password.trim() === "") {
@@ -40,8 +21,8 @@ function Login({ onLoginSuccess }: LoginProps) {
         }
         if (
             !(
-                (username === Admin.name && password === Admin.password) ||
-                (username === Mael.name && password === Mael.password)
+                (username === AdminUser.getName() && password === AdminUser.getPassword()) ||
+                (username === MaelUser.getName() && password === MaelUser.getPassword())
             )
         ) {
             setMessage("Error credentiales incorrectas");
@@ -54,10 +35,9 @@ function Login({ onLoginSuccess }: LoginProps) {
     const auth = () => {
         const connected = connect();
         if (connected) {
-            setPerfil(username);
-            onLoginSuccess(username); // transmet au parent
+            onLoginSuccess(username); // transmet le nom d'utilisateur après une connexion réussie
         } else {
-            setPerfil("Error login");
+            setMessage("Error login");
         }
     };
 

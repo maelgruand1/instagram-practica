@@ -6,18 +6,21 @@ import PublicationManager from "./modules/PublicationManager";
 const storage = new Storage();
 const pubManager = new PublicationManager();
 
-function NewPublication() {
+interface NewPublicationProps {
+    username: string;
+    onNewPublication?: () => void; // Callback après ajout
+}
+
+function NewPublication({ username }: NewPublicationProps) {
     const [title, setTitle] = useState("");
     const [image, setImage] = useState("");
     const [publications, setPublications] = useState<Publication[]>([]);
-    const [showModal, setShowModal] = useState(false);
-    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     useEffect(() => {
         const setup = async () => {
             await storage.init(); // Initialiser IndexedDB
             const pubs = await storage.getAllPublications(); // Charger depuis IndexedDB
-            pubs.forEach(pub => pubManager.create(pub.title, pub.image)); // Charger dans PublicationManager en mémoire
+            pubs.forEach(pub => pubManager.create(pub.title, pub.username, pub.image)); // Charger dans PublicationManager en mémoire
             setPublications(pubManager.getAll());
         };
         setup();
@@ -25,26 +28,11 @@ function NewPublication() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const newPub = pubManager.create(title, image); // Créer une publication en mémoire
-        await storage.addPublication(newPub.title, newPub.image); // Ajouter dans IndexedDB
+        const newPub = pubManager.create(username, title, image); // Créer une publication en mémoire
+        await storage.addPublication(username, newPub.title, newPub.image);
         setPublications(pubManager.getAll()); // Mettre à jour l'état des publications
         setTitle("");
         setImage("");
-    };
-
-    const handleLeftClick = (id: number) => {
-        setSelectedId(id);
-        setShowModal(true); // Ouvrir la modal
-    };
-
-    const confirmDelete = async () => {
-        if (selectedId !== null) {
-            pubManager.delete(selectedId); // Supprimer en mémoire
-            await storage.deletePublication(selectedId); // Supprimer de IndexedDB
-            setPublications(pubManager.getAll()); // Mettre à jour l'état des publications
-            setShowModal(false); // Fermer la modal
-            setSelectedId(null);
-        }
     };
 
     return (
@@ -71,27 +59,12 @@ function NewPublication() {
 
             <div className="publication-list">
                 {publications.map(pub => (
-                    <div
-                        key={pub.id}
-                        className="publication-card"
-                        onClick={() => handleLeftClick(pub.id)}
-                    >
+                    <div key={pub.id} className="publication-card">
                         <img src={pub.image} alt={pub.title} />
                         <p>{pub.title}</p>
                     </div>
                 ))}
             </div>
-
-            {/* Modal */}
-            {showModal && (
-                <div className="modal-overlay"> {/* Fond de la modal */}
-                    <div className="modal">
-                        <p>Do you want to delete this publication?</p>
-                        <button onClick={confirmDelete}>Yes</button>
-                        <button onClick={() => setShowModal(false)}>No</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

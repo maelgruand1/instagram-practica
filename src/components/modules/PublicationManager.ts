@@ -1,5 +1,6 @@
 export interface Publication {
     id: number;
+    username: string;
     title: string;
     image: string;
 }
@@ -8,9 +9,10 @@ export default class PublicationManager {
     private publications: Publication[] = [];
     private nextId: number = 1;
 
-    create(title: string, image: string): Publication {
+    create(username: string, title: string, image: string): Publication {
         const newPub: Publication = {
             id: this.nextId++,
+            username,
             title,
             image,
         };
