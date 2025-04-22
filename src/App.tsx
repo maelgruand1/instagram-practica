@@ -7,7 +7,6 @@ import Perfil from "./components/Profile";
 import Publications from "./components/Publications";
 import NewPublication from "./components/newPublications";
 
-
 function App() {
     const [page, setPage] = useState("home");
     const [username, setUsername] = useState("");
@@ -15,29 +14,40 @@ function App() {
     const renderPage = () => {
         switch (page) {
             case "home":
-                return <Home/>;
+                return (
+                    <>
+                        <Home />
+                        <Publications />
+                    </>
+                );
+
             case "login":
                 return <Login onLoginSuccess={(name) => {
                     setUsername(name);
                     setPage("home"); // Revenir à l'accueil après login
                 }} />;
             case "publications":
-                return <Publications/> ;
+                return <Publications />;
             case "perfil":
-                return <Perfil username={username}/>
+                return <Perfil username={username} />;
             case "plus":
-                return <NewPublication username={username}/>;
+                return <NewPublication username={username} />;
             default:
                 return <Err404 />;
         }
     };
 
     return (
-        <div>
-            <Navbar onNavigate={setPage} />
-          
+        <div id="root">
+            <main>
+                {/* Le contenu principal s'affichera ici */}
+                {renderPage()}
 
-            {renderPage()}
+            </main>
+
+            {/* La navbar fixe */}
+            <Navbar onNavigate={setPage} />
+
         </div>
     );
 }

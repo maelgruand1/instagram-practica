@@ -83,10 +83,15 @@ const confirmDelete = async () => {
                                         className="publication-card"
                                         onClick={() => handleLeftClick(pub.id)} // Appel à la méthode handleLeftClick
                                     >
-                                        <img src={pub.image} alt={pub.title} />
-                                        <p><strong>Created by {pub.username}</strong></p>
+                                        <p><strong>By {pub.username}</strong></p>
+                                        <p><strong>On: {new Date(pub.dateSent).toLocaleDateString()}</strong></p>
                                         <p>{pub.title}</p>
+                                        <img src={pub.image} alt={pub.title} />
+                                        
+                                        
+                                        
                                     </div>
+
                                 ))
                             ) : (
                                 <p>No publications found.</p>

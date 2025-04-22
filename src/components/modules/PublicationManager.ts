@@ -3,18 +3,20 @@ export interface Publication {
     username: string;
     title: string;
     image: string;
+    dateSent: string; // ← ISO string pour la sérialisation (optionnellement Date si tu préfères travailler avec des objets)
 }
 
 export default class PublicationManager {
     private publications: Publication[] = [];
     private nextId: number = 1;
 
-    create(username: string, title: string, image: string): Publication {
+    create(username: string, title: string, image: string, dateSent: string): Publication {
         const newPub: Publication = {
             id: this.nextId++,
             username,
             title,
             image,
+            dateSent, // ← corrigé ici aussi
         };
         this.publications.push(newPub);
         return newPub;

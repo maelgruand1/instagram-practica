@@ -2,25 +2,35 @@ import React, { useEffect, useState } from "react";
 import './Publications.css';
 import Storage, { Publication } from "./modules/Storage";
 import PublicationManager from "./modules/PublicationManager";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const storage = new Storage();
 const pubManager = new PublicationManager();
 
 interface NewPublicationProps {
     username: string;
-    onNewPublication?: () => void; // Callback après ajout
+    onNewPublication?: () => void; // ← callback après ajout
 }
 
-function NewPublication({ username }: NewPublicationProps) {
+function NewPublication({ username, onNewPublication }: NewPublicationProps) {
     const [title, setTitle] = useState("");
     const [image, setImage] = useState("");
     const [publications, setPublications] = useState<Publication[]>([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     useEffect(() => {
         const setup = async () => {
-            await storage.init(); // Initialiser IndexedDB
-            const pubs = await storage.getAllPublications(); // Charger depuis IndexedDB
-            pubs.forEach(pub => pubManager.create(pub.title, pub.username, pub.image)); // Charger dans PublicationManager en mémoire
+            await storage.init();
+            const pubs = await storage.getAllPublications();
+            pubs.forEach(pub => 
+                pubManager.create(pub.title, pub.username, pub.image, pub.dateSent)
+            );
             setPublications(pubManager.getAll());
         };
         setup();
@@ -28,11 +38,31 @@ function NewPublication({ username }: NewPublicationProps) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const newPub = pubManager.create(username, title, image); // Créer une publication en mémoire
-        await storage.addPublication(username, newPub.title, newPub.image);
-        setPublications(pubManager.getAll()); // Mettre à jour l'état des publications
+        const newPub = pubManager.create(username, title, image, new Date().toISOString()); // Ajout de la date d'envoi
+        await storage.addPublication(username, newPub.title, newPub.image); // Ajout de la date d'envoi dans le stockage
+
+        setPublications(pubManager.getAll());
         setTitle("");
         setImage("");
+
+        if (onNewPublication) {
+            onNewPublication(); // ← callback vers le parent
+        }
+    };
+
+    const handleLeftClick = (id: number) => {
+        setSelectedId(id);
+        setShowModal(true);
+    };
+
+    const confirmDelete = async () => {
+        if (selectedId !== null) {
+            pubManager.delete(selectedId);
+            await storage.deletePublication(selectedId);
+            setPublications(pubManager.getAll());
+            setShowModal(false);
+            setSelectedId(null);
+        }
     };
 
     return (
@@ -59,12 +89,29 @@ function NewPublication({ username }: NewPublicationProps) {
 
             <div className="publication-list">
                 {publications.map(pub => (
-                    <div key={pub.id} className="publication-card">
+                    <div
+                        key={pub.id}
+                        className="publication-card"
+                        onClick={() => handleLeftClick(pub.id)}
+                    >
                         <img src={pub.image} alt={pub.title} />
                         <p>{pub.title}</p>
+                        <p><small>Sent on: {new Date(pub.dateSent).toLocaleDateString()}</small></p> {/* Affichage de la date d'envoi */}
                     </div>
                 ))}
             </div>
+
+            {/* Modal de confirmation */}
+            <Dialog open={showModal} onClose={() => setShowModal(false)}>
+                <DialogTitle>Confirm deletion</DialogTitle>
+                <DialogContent>
+                    <Typography>Do you want to delete this publication?</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setShowModal(false)}>Cancel</Button>
+                    <Button onClick={confirmDelete} color="error">Delete</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

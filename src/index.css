@@ -1,13 +1,154 @@
-body {
+/* Reset + base */
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #262626;
+  overflow-x: hidden; /* empêche les débordements horizontaux */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Prend tout l'espace disponible */
+  overflow-y: auto; /* Permet le défilement vertical */
+  padding-bottom: 120px;
+  padding-top: 10px; /* Optionnel : pour ne pas que le contenu touche le bord supérieur */
+  margin-bottom: 60px; /* Ajoute une marge en bas pour l'espace de la navbar */
+}
+
+/* Boutons */
+button {
+  background-color: #0095f6;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%; /* S'assure que le bouton reste dans le cadre */
+  box-sizing: border-box; /* Assure que la taille du bouton inclut le padding */
+}
+
+button:hover {
+  background-color: #007cd1;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="password"] {
+  width: 90%;
+  max-width: 400px;
+  margin: 10px auto;
+  display: block;
+  padding: 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+/* Formulaires */
+form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Navbar (style mobile Instagram) */
+.navbar {
+  background-color: black; /* Fond blanc pour éviter la transparence */
+  border-top: 1px solid #dbdbdb;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px; /* Réduction de la hauteur */
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 80;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour la visibilité */
+}
+
+.navbar a {
+  color: white; /* Changer la couleur du texte en blanc */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.navbar a:hover {
+  color: #0095f6;
+}
+
+/* Publications feed */
+.publication-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+/* Card Instagram-like */
+.publication-card {
+  background-color: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.publication-card:hover {
+  transform: scale(1.01);
+}
+
+.publication-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.publication-card p {
+  padding: 10px 12px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* Responsive */
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .publication-card {
+    border-radius: 0;
+  }
+
+  .navbar {
+    font-size: 12px;
+    height: 350px;
+    padding: 50px;
+  }
+
+  .navbar a { /* Ajoute cette règle pour la version mobile */
+    color: white;
+  }
+
+  button {
+    width: 90%; /* Assure que les boutons respectent le cadre */
+    max-width: 300px;
+    margin-top: 10px;
+  }
 }

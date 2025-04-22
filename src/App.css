@@ -1,38 +1,126 @@
-.App {
+/* Reset + base */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #262626;
+}
+
+h1, h2, h3 {
   text-align: center;
+  color: #262626;
+  font-weight: 600;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Boutons */
+button {
+  background-color: #0095f6;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button:hover {
+  background-color: #007cd1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Inputs */
+input[type="text"],
+input[type="password"] {
+  width: 90%;
+  max-width: 400px;
+  margin: 10px auto;
+  display: block;
+  padding: 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+/* Formulaires */
+form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Navbar (style mobile Instagram) */
+.navbar {
+  background-color: white;
+  border-top: 1px solid #dbdbdb;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.navbar a {
+  color: #262626;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.navbar a:hover {
+  color: #0095f6;
+}
+
+.publication {
+  padding: 1rem;
+  max-height: 80vh; /* Ajuste selon ton layout */
+  overflow-y: auto;
+}
+
+.publication-list {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  
+}
+
+.publication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+.publication-card img {
+  width: 100%;
+  max-width: 200px; /* Taille maximale pour éviter les images énormes */
+  height: auto;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .publication-card {
+    border-radius: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  .navbar {
+    font-size: 12px;
+  }
+
+  button {
+    width: 90%;
+    max-width: 300px;
+    margin-top: 10px;
   }
 }
