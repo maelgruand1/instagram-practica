@@ -1,0 +1,11 @@
+header{
+    padding: auto;
+    margin: auto;
+}
+.center{
+    padding: 5px;
+}
+.center h1{
+    text-decoration: underline;
+
+}

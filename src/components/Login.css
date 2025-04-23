@@ -5,10 +5,11 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    position: relative;
-    padding-top: 0px;
+    /* position: relative;
+    padding-top: 0px; */
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
+    
 }
 
 /* Titre principal */
@@ -19,8 +20,10 @@ h3 {
 
 /* Conteneur du formulaire */
 .form {
+    bottom: 200px;
+    position: relative;
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;

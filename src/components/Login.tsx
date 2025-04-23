@@ -51,14 +51,14 @@ function Login({ onLoginSuccess }: LoginProps) {
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username"
                 />
-                <br />
+                
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                 />
-                <br />
+                
                 <button onClick={auth}>Validar</button>
             </div>
             <p id="message" style={{ color: message.startsWith("Error") ? "#f00" : "#0f0" }}>
